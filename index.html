@@ -60,10 +60,24 @@
           );
         }
         function decompress() {
-          editor.setValue(LZString.decompressFromBase64(editor.getValue()));
-          editor.getAction("editor.action.formatDocument").run();
-          editor.getAction("actions.find").run();
-          //   editor.trigger("actions.find");
+          // Get the decompressed value
+          const decompressedValue = LZString.decompressFromBase64(editor.getValue());
+
+          // Hide the editor
+          document.getElementById("div-editor").style.display = "none";
+
+          // Create a new div to display the decompressed value
+          const decompressedDiv = document.createElement("div");
+          decompressedDiv.style.padding = "20px";
+          decompressedDiv.style.border = "1px solid #ccc";
+          decompressedDiv.style.backgroundColor = "#f4f4f4";
+          decompressedDiv.style.whiteSpace = "pre-wrap"; // Preserve whitespace formatting
+
+          // Set the decompressed value as the content
+          decompressedDiv.textContent = decompressedValue;
+
+          // Append the new div to the body or another container
+          document.body.appendChild(decompressedDiv);
         }
         document
           .getElementById("btn-compress")
